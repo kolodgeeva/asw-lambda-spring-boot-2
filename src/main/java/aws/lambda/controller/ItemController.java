@@ -38,17 +38,17 @@ public class ItemController {
 
   @PostMapping
   public Item createItem(@RequestBody Item item) {
-    return item;
+    return itemService.createItem(item);
   }
 
-  @PutMapping("/{name}")
-  Item updateItem(@RequestBody Item item, @PathVariable String name) {
-    return item.withName(item.getName() + " " + name);
+  @PutMapping("/{itemId}")
+  public Item updateItem(@RequestBody Item item, @PathVariable String itemId) {
+    return itemService.updateItem(item, itemId);
   }
 
-  @DeleteMapping("/{name}")
-  String deleteEmployee(@PathVariable String name) {
-    return name + " deleted";
+  @DeleteMapping("/{itemId}")
+  public void deleteEmployee(@PathVariable String itemId) {
+    itemService.deleteItem(itemId);
   }
 
 }

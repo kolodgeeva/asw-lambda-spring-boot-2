@@ -20,6 +20,8 @@ dependencies {
   compile (
           'org.springframework.boot:spring-boot-starter-web:2.2.6.RELEASE',
           'com.amazonaws.serverless:aws-serverless-java-container-springboot2:[1.0,)',
+          'com.github.derjust:spring-data-dynamodb:5.1.0',
+          'org.springframework:spring-tx:5.2.5.RELEASE',
           'io.symphonia:lambda-logging:1.0.1'
   )
 
