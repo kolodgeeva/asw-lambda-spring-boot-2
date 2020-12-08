@@ -2,6 +2,7 @@ package aws.lambda.service;
 
 import static aws.lambda.domain.user.UserType.TEACHER;
 import static lombok.AccessLevel.PRIVATE;
+import static org.apache.logging.log4j.util.Strings.isEmpty;
 
 import aws.lambda.domain.user.Teacher;
 import aws.lambda.domain.user.TeacherRepository;
@@ -17,8 +18,14 @@ public class TeacherService {
 
   TeacherRepository teacherRepository;
 
-  public List<Teacher> getTeachers() {
-    return teacherRepository.findByUserType(TEACHER);
+  public List<Teacher> getTeachers(String userId, String name) {
+    if (!isEmpty(userId)) {
+      return teacherRepository.findByUserTypeAndUserIdStartsWith(TEACHER, userId);
+    } else if (!isEmpty(name)) {
+      return teacherRepository.findByUserTypeAndNameStartsWith(TEACHER, name);
+    } else {
+      return teacherRepository.findByUserType(TEACHER);
+    }
   }
 
   public Teacher getTeacher(String userId) {

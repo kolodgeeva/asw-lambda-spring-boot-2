@@ -5,6 +5,7 @@ import static lombok.AccessLevel.PRIVATE;
 import aws.lambda.domain.user.Student;
 import aws.lambda.service.StudentService;
 import java.util.List;
+import javax.ws.rs.QueryParam;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -27,8 +28,10 @@ public class StudentController {
   StudentService studentService;
 
   @GetMapping
-  public List<Student> getStudents() {
-    return studentService.getStudents();
+  public List<Student> getStudents(
+      @QueryParam("userId") String userId,
+      @QueryParam("name") String name) {
+    return studentService.getStudents(userId, name);
   }
 
   @GetMapping(path = "/{name}")
